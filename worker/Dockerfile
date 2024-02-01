@@ -8,10 +8,11 @@
 # docker buildx build --platform "linux/arm64/v8" .
 FROM --platform= mcr.microsoft.com/dotnet/sdk:7.0 as build
 RUN echo "I am running on linux/amd64, building for linux/arm64/v8"
-
+RUN echo pwd
 WORKDIR /source
 COPY *.csproj .
 RUN dotnet restore -a amd64
+
 
 COPY . .
 RUN dotnet publish -c release -o /app -a amd64 --self-contained false --no-restore
